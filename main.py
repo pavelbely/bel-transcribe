@@ -25,7 +25,7 @@ def replace_text_with_replacements(input_text, replacements, is_full_word = Fals
   return result
 
 #######################################################################
-input_file = 'input.srt'
+input_file = 'litva-2.srt'
 output_file = 'output.srt'
 #######################################################################
 
@@ -39,10 +39,10 @@ outfile_path = Path(__file__).with_name(output_file)
 with open(infile_path, 'r', encoding='utf-8') as infile, open(outfile_path, 'w', encoding='utf-8') as outfile:
     lines = infile.readlines()
     for line in lines:
-        line = replace_text_with_replacements(line, maps['word_map'], True)
         line = replace_text_with_replacements(line, maps['letter_map'])
         line = replace_text_with_replacements(line, maps['syllable_map'])
         line = replace_text_with_replacements(line, maps['syllable_group_map'])
+        line = replace_text_with_replacements(line, maps['word_map'], True)
         outfile.write(line)
 
 print(f"Word replacements complete. Modified file saved to {output_file}")
