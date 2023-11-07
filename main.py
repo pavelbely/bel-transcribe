@@ -7,16 +7,20 @@ def get_replacer(pattern, replacement):
   def replacer(match):
     g = match.group()
     replaced_str= re.sub(pattern, replacement, g, flags=re.IGNORECASE)
-    if replaced_str.islower(): return replaced_str.lower()
-    if replaced_str.istitle(): return replaced_str.title()
-    if replaced_str.isupper(): return replaced_str.upper()
+    if g.islower(): return replaced_str.lower()
+    if g.istitle(): return replaced_str.title()
+    if g.isupper(): return replaced_str.upper()
     return replaced_str
   return replacer
 
 def replace_text_with_replacements(input_text, replacements, is_full_word = False):
   result = input_text
   for key in replacements.keys():
-    pattern = (r'\b(' if is_full_word else '(') + key + (r')\b' if is_full_word else ')')
+    pattern = None
+    if is_full_word:
+      pattern = rf'\b({key})\b'
+    else:
+      pattern = rf'({key})'
     result = re.sub(pattern, get_replacer(pattern, replacements.get(key)), result, flags=re.IGNORECASE)
   return result
 
