@@ -25,7 +25,7 @@ def replace_text_with_replacements(input_text, replacements, is_full_word = Fals
   return result
 
 #######################################################################
-input_file = 'litva-2.srt'
+input_file = 'input.srt'
 output_file = 'output.srt'
 #######################################################################
 
